@@ -43,13 +43,14 @@ public class Fruit {
             name = "Persimmon";
         }
     }
+
     public boolean testmoveY() {
         int max = (600 - 30 - size / 2 - 7); //SCREENHEIGHT-BUFFER - radius - stroke weight
         if (!hit) {
             if (dropped) {
                 //hit ground
                 if (y < max) {
-                    speed+=GRAVITY;
+                    speed += GRAVITY;
                     y += speed;
                     if (y + speed > max) {
                         y = max;
@@ -64,13 +65,14 @@ public class Fruit {
     }
 
     public void moveX(PApplet game) {
-//        if(!dropped && x<(600-30) && x>30) {
-//            x = game.mouseX;
-//        }
-        if (!dropped) {
-            x = game.mouseX;
-        }
+        double max = 600 - 30 - size / (double) 2;
+        double min = 30 + size / (double) 2;
 
+        if (!dropped) {
+            if (game.mouseX <= max && game.mouseX >= min) {
+                x = game.mouseX;
+            }
+        }
     }
 
     public void bounce() {
@@ -85,7 +87,7 @@ public class Fruit {
             speed = -speed * damping;
         }
         if (speed == 0 && y < max) {
-            speed+=GRAVITY;
+            speed += GRAVITY;
         }
         if (Math.abs(speed) < 0.1) {
             speed = 0;
