@@ -82,12 +82,14 @@ public class Main extends PApplet {
 
         //Seeing if scored a point
         if (fruits.size() > 1) {
-            for (int i = 0; i < fruits.size() - 1; i++) {
-                for (int j = i + 1; j < fruits.size(); j++) {
+            for (int i = 0; i < fruits.size(); i++) {
+                for (int j = 0; j < fruits.size(); j++) {
+                    if(i==j) break;
                     Fruit fruitA = fruits.get(i);
                     Fruit fruitB = fruits.get(j);
                     if (fruitA.isDropped() && fruitB.isDropped()) {
                         if (fruitA.isTouching(fruitB) && (fruitA.getName().equals(fruitB.getName()))) {
+                            System.out.println(fruitA.getName());
                             score += fruitA.getScore();
                             fruitB.changeType();
                             fruits.remove(fruitA);

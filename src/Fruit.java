@@ -38,9 +38,29 @@ public class Fruit {
             size = 35;
             name = "Dekopon";
         } else if (type < 1) {
-            game.fill(255, 255, 0);
+            game.fill(255, 165, 0);
             size = 50;
             name = "Persimmon";
+        }else if (type < 1.2) {
+            game.fill(50, 0, 0);
+            size = 75;
+            name = "Strawberry";
+        }else if (type < 1.4) {
+            game.fill(0, 100, 0);
+            size = 85;
+            name = "Pear";
+        }else if (type < 1.6) {
+            game.fill(255, 255, 0);
+            size = 100;
+            name = "Pineapple";
+        }else if (type < 1.8) {
+            game.fill(0, 255, 100);
+            size = 115;
+            name = "Melon";
+        }else if (type < 2.0) {
+            game.fill(0, 255, 150);
+            size = 125;
+            name = "Watermelon";
         }
     }
 
@@ -139,7 +159,7 @@ public class Fruit {
         double distY = this.getY() - other.getY();
         double centerDist = Math.sqrt(distX * distX + distY * distY);
 
-        return Math.abs(centerDist - (this.getSize() + other.getSize())) < 1.0;
+        return centerDist<=(2*this.size);
 
     }
 }
