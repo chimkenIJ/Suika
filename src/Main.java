@@ -15,14 +15,19 @@ public class Main extends PApplet {
     private int score = 0;
     private boolean gameOver = false;
     private boolean drop = false;
+    private double currObj = Math.random();
+    private Fruit next;
 
     public void settings() {
         size(SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
     public void setup() {
-        Fruit newFruit = new Fruit(Math.random(), mouseX, BUFFER + 30);
+        Fruit newFruit = new Fruit(currObj, mouseX, BUFFER + 30);
+        currObj = Math.random();
+        next = new Fruit(currObj, 500, BUFFER + 30);
         fruits.add(newFruit);
+
     }
 
     public void draw() {
@@ -50,22 +55,23 @@ public class Main extends PApplet {
         text(minutes + ":" + ((seconds) / 10) + "" + seconds % 10, 270, 30);
 
         //Spawn Fruit
+
         if (fruits.get(fruits.size() - 1).isDropped()) {
-            Fruit newFruit = new Fruit(Math.random(), mouseX, BUFFER + 30);
+            Fruit newFruit = new Fruit(currObj, mouseX, BUFFER + 30);
+            currObj = Math.random();
+            next = new Fruit(currObj, 500, BUFFER + 30);
             fruits.add(newFruit);
         }
-
+        next.drawFruit(this);
         //Fruit Mechanics
         for (Fruit fruit : fruits) {
 
             //Move fruit
             fruit.drawFruit(this);
             fruit.moveX(this);
-            if(fruit.testmoveY()) {
+            if (fruit.testmoveY()) {
                 fruit.bounce();
             }
-
-
 
             //Drop current fruit
             if (drop) {
